@@ -1,5 +1,5 @@
 # Use uma imagem base do Maven para compilação
-FROM maven:3.9.5-openjdk-21 AS build
+FROM maven:3.9.5 AS build
 
 # Configuração do diretório de trabalho
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package
 
 # Imagem base para execução
-FROM openjdk:21
+FROM openjdk:21-slim
 
 # Diretório de trabalho dentro do contêiner
 WORKDIR /app

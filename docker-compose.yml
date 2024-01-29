@@ -5,12 +5,13 @@ services:
     image: mysql:latest
     container_name: mysql
     ports:
-      - "3306:3306"
+      - "3308:3308"
     environment:
       MYSQL_ROOT_PASSWORD: dev
       MYSQL_DATABASE: animals
       MYSQL_USER: dev
       MYSQL_PASSWORD: dev
+      MYSQL_TCP_PORT: 3308
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -20,9 +21,10 @@ services:
   cardapio:
     build: .
     environment:
-      DB_HOST: dev
+      DB_HOST: mysql
       DB_USER: dev
       DB_PASS: dev
+      DB_PORT: 3308
     ports:
       - "8080:8080"
     depends_on:
