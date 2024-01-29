@@ -1,13 +1,12 @@
-package com.example.erudio;
+package com.example.petvet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ErudioApplication {
-
+public class PetVetApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ErudioApplication.class, args);
+		SpringApplication.run(PetVetApplication.class, args);
 	}
 
 }

@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  # Serviço para o PostgreSQL
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_DATABASE: animals
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - local
+
+  # Serviço para a aplicação Spring Boot
+  cardapio:
+    build: .
+    environment:
+      DB_HOST: dev
+      DB_USER: dev
+      DB_PASS: dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge
+
+volumes:
+  mysql_data:
