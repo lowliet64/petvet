@@ -1,5 +1,5 @@
 
-<center>
+<div align="center">
 <img src="https://static.vecteezy.com/system/resources/previews/009/303/117/non_2x/cat-paw-clipart-design-illustration-free-png.png" width="200" height="200">
 
 <div>
@@ -10,7 +10,7 @@
 </div>
 
 # PETVET
-</center>
+</div>
 
 
 
