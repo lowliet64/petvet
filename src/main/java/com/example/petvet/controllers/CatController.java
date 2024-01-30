@@ -1,8 +1,8 @@
 package com.example.petvet.controllers;
 
 
-import com.example.petvet.entities.Cat;
-import com.example.petvet.exceptions.InstanceNotFoundException;
+import com.example.petvet.data.vo.v1.CatVO;
+import com.example.petvet.data.vo.v2.CatVOV2;
 import com.example.petvet.services.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,11 +20,11 @@ public class CatController {
     CatService catService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Cat> findAll(){
+    public List<CatVO> findAll(){
         return catService.listAll();
     }
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cat findCat(@PathVariable(value="id") int id)  throws Exception{
+    public CatVO findCat(@PathVariable(value="id") int id)  throws Exception{
         return catService.findById(id);
 
     }
@@ -36,13 +36,21 @@ public class CatController {
     }
 
 
+    // ======================== Treinando versionamento de endpoints
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cat create(@RequestBody Cat cat){
+    public CatVO create(@RequestBody CatVO cat){
         return catService.createCat(cat);
     }
 
-    @PutMapping(name="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cat update(@RequestBody Cat cat , @PathVariable int id) throws  Exception{
+    @PostMapping(value="/v2",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public CatVOV2 createV2(@RequestBody CatVOV2 cat){
+        return catService.createCatV2(cat);
+    }
+    //======================
+
+
+    @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public CatVO update(@RequestBody CatVO cat , @PathVariable int id) throws  Exception{
         return catService.updateCat(id,cat);
     }
 
