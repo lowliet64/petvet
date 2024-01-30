@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("cats")
+@RequestMapping("api/v1/cats/")
 public class CatController {
 
     @Autowired
@@ -28,25 +28,16 @@ public class CatController {
         return catService.findById(id);
 
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCat(@PathVariable(value="id") int id)  throws Exception{
             catService.deleteCat(id);
             return ResponseEntity.noContent().build();
     }
 
-
-    // ======================== Treinando versionamento de endpoints
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public CatVO create(@RequestBody CatVO cat){
         return catService.createCat(cat);
     }
-
-    @PostMapping(value="/v2",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public CatVOV2 createV2(@RequestBody CatVOV2 cat){
-        return catService.createCatV2(cat);
-    }
-    //======================
 
 
     @PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
